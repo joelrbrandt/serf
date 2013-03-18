@@ -1,0 +1,34 @@
+{
+    "setuid" : "nodeuser",
+    "setgid" : "nodegroup",
+    "children" : 4,
+    "servers" : [
+        {
+            "ip" : "127.0.0.1",
+            "port" : "8080",
+            "name" : "foo",
+            "app" : "foo.js"
+        },
+        {
+            "ip" : "127.0.0.1",
+            "port" : "8081",
+            "name" : "bar",
+            "vhosts" : [
+                {
+                    "domains" : ["baz1.com", "baz2.com", "*.baz.com"],
+                    "app" : "baz.js"
+                },
+                {
+                    "domains" : ["hoo.com", "*"],
+                    "static" : "/var/www/hoo"
+                }
+            ]
+        },
+        {
+            "ip" : "127.0.0.1",
+            "port" : "8082",
+            "name" : "loo",
+            "static" : "/var/www/loo"
+        }            
+    ]
+}
