@@ -6,7 +6,8 @@
 (function () {
     "use strict";
     
-    var launcher = require("../lib/launcher"),
+    var pkg = require("../package.json"),
+        launcher = require("../lib/launcher"),
         optimist = require("optimist"),
         path = require("path"),
         fs = require("fs");
@@ -23,7 +24,8 @@
         "n": "noname",
         "c": 0,
         "o": false,
-        "h": false
+        "h": false,
+        "version": false
     }).alias({
         "i": "ip",
         "p": "port",
@@ -44,6 +46,9 @@
     
     if (argv.help) {
         console.log(optimist.help());
+        process.exit(0);
+    } else if (argv.version) {
+        console.log("v" + pkg.version);
         process.exit(0);
     }
     
