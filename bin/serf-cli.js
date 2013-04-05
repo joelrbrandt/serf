@@ -13,17 +13,29 @@
 
     var config = {};
     
+    // TODO: "open" option only works on mac in single-process mode.
+    // Should notify when those conditions aren't met that the
+    // option is ignored. Also, should have usage info.
+    
     var argv = optimist["default"]({
-        "ip": "127.0.0.1",
-        "port": "8080",
-        "name": "noname",
-        "children": 0
+        "i": "127.0.0.1",
+        "p": "8080",
+        "n": "noname",
+        "c": 0,
+        "o": false
+    }).alias({
+        "i": "ip",
+        "p": "port",
+        "n": "name",
+        "c": "children",
+        "o": "open",
     }).argv;
             
     if (argv.config) {
         config = require(path.resolve(process.cwd(), argv.config));
     } else {
         config = {
+            open : argv.open,
             children : argv.children,
             servers : [ {
                 ip: argv.ip,
