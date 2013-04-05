@@ -1,6 +1,6 @@
 {
   "name": "serf",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "really simple webserver",
   "main": "launcher.js",
   "scripts": {

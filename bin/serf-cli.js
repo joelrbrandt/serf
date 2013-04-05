@@ -15,22 +15,38 @@
     
     // TODO: "open" option only works on mac in single-process mode.
     // Should notify when those conditions aren't met that the
-    // option is ignored. Also, should have usage info.
+    // option is ignored.
     
     var argv = optimist["default"]({
         "i": "127.0.0.1",
         "p": "8080",
         "n": "noname",
         "c": 0,
-        "o": false
+        "o": false,
+        "h": false
     }).alias({
         "i": "ip",
         "p": "port",
         "n": "name",
         "c": "children",
         "o": "open",
-    }).argv;
-            
+        "h": "help"
+    }).describe({
+        "config": "path to config file. If a config file is provided, overrides all other options",
+        "i": "ip address for a static server at current directory",
+        "p": "port for a static server at current directory",
+        "n": "name of static server (for logging) at current directory",
+        "c": "number of child processes to launch",
+        "o": "open url of server in default browser (mac/single-process only)",
+        "h": "display help message",
+    }).usage("Usage: $0 [options]")
+    .argv;
+    
+    if (argv.help) {
+        console.log(optimist.help());
+        process.exit(0);
+    }
+    
     if (argv.config) {
         config = require(path.resolve(process.cwd(), argv.config));
     } else {
